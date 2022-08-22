@@ -1,0 +1,44 @@
+﻿@page "/Cheques"
+@using Projet.Entities
+@using Projet.Repositories
+@inject IChequeRepository _ChequeRepo
+<h3>Liste des Cheques</h3>
+
+@if (Cheques != null)
+{
+    <table class="table table-sm table-light">
+        <thead>
+            <tr>
+                <th>Numéro</th>
+                 <th>Montant</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Cheque Cheque in Cheques)
+            {
+                <tr>
+                    <td>@Cheque.Numero</td>
+                    <td>@Cheque.Montant</td>
+                </tr>
+              
+            }
+
+        </tbody>
+
+    </table>
+
+}
+
+
+
+
+
+@code {
+    protected List<Cheque> Cheques = new List<Cheque>();
+     protected override void OnInitialized()
+    {
+        Cheques = _ChequeRepo.GetAll();
+    }
+
+}
